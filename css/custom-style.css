@@ -1,0 +1,93 @@
+.bg-primary,
+.btn-primary {
+    background-color: var(--primary) !important;
+}
+.text-primary {
+    color: var(--primary) !important;
+}
+.text-secondary {
+    color: var(--secondary) !important;
+}
+.bg-light {
+    background-color: rgba(238, 125, 0, 0.11) !important;
+}
+
+/* Topbar  */
+.topbar a:hover .text-light {
+    color: var(--secondary) !important;
+}
+.btn-outline-light:hover {
+    color: var(--secondary);
+    background-color: transparent;
+    border-color: var(--secondary);
+}
+
+/* Header  */
+.logo img {
+    max-width: 200px;
+}
+.navbar-dark {
+    background-color: #fff;
+}
+header .dropdown-item {
+    color: var(--primary);
+}
+header .dropdown-item:hover,
+header .nav-link.dropdown-toggle.show:focus,
+.navbar-dark .navbar-nav .nav-link.show {
+    color: var(--secondary) !important;
+    background-color: transparent;
+}
+
+/* Footer  */
+footer .footer-info div a {
+    color: #fff !important;
+}
+
+/* Our Brands */
+.brands .rounded {
+    border: 2px solid rgb(0 0 0 / 6%);
+    border-radius: 10px !important;
+}
+.brands .zoomIn img {
+    transition: .5s;
+}
+.brands .zoomIn:hover img {
+    transform: scale(1.15);
+}
+
+/*  Contact Us */
+.contact-us-info a:hover {
+    color: var(--secondary) !important;
+}
+form.contact-us .form-control:focus {
+    box-shadow: 0 0 0 .25rem rgba(238, 125, 0, 0.11) !important;
+    border-color: rgba(238, 125, 0, 0.11) !important;
+}
+form.contact-us .btn:hover {
+    background-color: var(--secondary) !important;
+    color: #fff;
+}
+
+/*  Our Labs */
+.lab-type .p-4 a {
+    transition: .5s;
+}
+.lab-type .p-4 a:hover {
+    color: var(--secondary) !important;
+}
+.lab-type-list h5 {
+    width: calc(100% / 3);
+    padding-left: 35px;
+}
+.lab-type-list h5 i {
+    left: 0;
+}
+
+/* Service Gallery */
+.service-gallery .carousel-item img {
+    cursor: pointer;
+    border-radius: 10px;
+    height: 300px;
+    object-fit: cover;
+  }
