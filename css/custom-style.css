@@ -22,12 +22,25 @@
     border-color: var(--secondary);
 }
 
+/* Home */
+.max-h-700 {
+    max-height: 700px;
+}
+.carousel > button {
+    display: none;
+}
 /* Header  */
 .logo img {
     max-width: 200px;
 }
 .navbar-dark {
     background-color: #fff;
+}
+.topbar .row,
+.navbar-dark .navbar {    
+    max-width: 1430px;
+    width: 100%;
+    margin: auto;
 }
 header .dropdown-item {
     color: var(--primary);
@@ -38,10 +51,33 @@ header .nav-link.dropdown-toggle.show:focus,
     color: var(--secondary) !important;
     background-color: transparent;
 }
+.carousel-content {
+    max-width: 1360px;
+    margin: auto;
+    width: 100%;
+    padding: 0 10px ;
+
+}
 
 /* Footer  */
 footer .footer-info div a {
     color: #fff !important;
+}
+/* Home */
+/*Our Labs*/
+.our-labs .owl-carousel .item img {
+    height: 70px;
+    width: auto;
+    margin: auto;
+}
+.our-labs .owl-carousel .item span {
+    display: block;
+    margin: 15px 0;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.04rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #091E3E;
 }
 
 /* Our Brands */

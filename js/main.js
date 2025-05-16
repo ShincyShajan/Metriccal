@@ -106,18 +106,20 @@
         loop: true,
         autoplay: true,
         smartSpeed: 1000,
+        autoplayTimeout: 2000,
+        autoplaySpeed: 500,
         responsive: {
             0:{
                 items:2
             },
             576:{
-                items:4
+                items:2
             },
             768:{
-                items:6
+                items:4
             },
             992:{
-                items:8
+                items:6
             }
         }
     });
@@ -168,3 +170,48 @@
       
 })(jQuery);
 
+document.addEventListener('DOMContentLoaded', function () {
+    const carouselElement = document.querySelector('#header-carousel');
+  
+    function animateSlide(slide) {
+      const innerText = slide.querySelector('.inner-text');
+      const buttons = slide.querySelector('.buttons');
+  
+      if (!innerText || !buttons) return;
+  
+      // Reset animations
+      innerText.classList.remove('animate__animated', 'animate__slideInLeft');
+      buttons.classList.remove('animate__animated', 'animate__slideInUp');
+      innerText.classList.add('invisible');
+      buttons.classList.add('invisible');
+  
+      // STEP 1: Animate inner text after 1s
+      setTimeout(() => {
+        innerText.classList.remove('invisible');
+        innerText.classList.add('animate__animated', 'animate__slideInLeft');
+        innerText.style.setProperty('--animate-duration', '1s');
+  
+        // STEP 2: Wait for innerText animation to finish, then animate buttons
+        innerText.addEventListener(
+          'animationend',
+          () => {
+            buttons.classList.remove('invisible');
+            buttons.classList.add('animate__animated', 'animate__slideInUp');
+            buttons.style.setProperty('--animate-duration', '1s');
+          },
+          { once: true }
+        );
+      }, 1000); // 1 second delay after image is visible
+    }
+  
+    // Animate first active slide on load
+    const firstSlide = carouselElement.querySelector('.carousel-item.active');
+    if (firstSlide) animateSlide(firstSlide);
+  
+    // Animate every time the carousel changes slide
+    carouselElement.addEventListener('slid.bs.carousel', function () {
+      const activeSlide = carouselElement.querySelector('.carousel-item.active');
+      if (activeSlide) animateSlide(activeSlide);
+    });
+  });
+  
