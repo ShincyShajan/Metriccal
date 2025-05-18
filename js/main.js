@@ -10,8 +10,8 @@
         }, 1);
     };
     spinner();
-    
-    
+
+
     // Initiate the wowjs
     new WOW().init();
 
@@ -24,28 +24,28 @@
             $('.navbar').removeClass('sticky-top shadow-sm');
         }
     });
-    
+
     // Dropdown on mouse hover
     const $dropdown = $(".dropdown");
     const $dropdownToggle = $(".dropdown-toggle");
     const $dropdownMenu = $(".dropdown-menu");
     const showClass = "show";
-    
-    $(window).on("load resize", function() {
+
+    $(window).on("load resize", function () {
         if (this.matchMedia("(min-width: 992px)").matches) {
             $dropdown.hover(
-            function() {
-                const $this = $(this);
-                $this.addClass(showClass);
-                $this.find($dropdownToggle).attr("aria-expanded", "true");
-                $this.find($dropdownMenu).addClass(showClass);
-            },
-            function() {
-                const $this = $(this);
-                $this.removeClass(showClass);
-                $this.find($dropdownToggle).attr("aria-expanded", "false");
-                $this.find($dropdownMenu).removeClass(showClass);
-            }
+                function () {
+                    const $this = $(this);
+                    $this.addClass(showClass);
+                    $this.find($dropdownToggle).attr("aria-expanded", "true");
+                    $this.find($dropdownMenu).addClass(showClass);
+                },
+                function () {
+                    const $this = $(this);
+                    $this.removeClass(showClass);
+                    $this.find($dropdownToggle).attr("aria-expanded", "false");
+                    $this.find($dropdownMenu).removeClass(showClass);
+                }
             );
         } else {
             $dropdown.off("mouseenter mouseleave");
@@ -58,8 +58,8 @@
         delay: 10,
         time: 2000
     });
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -69,7 +69,7 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
@@ -82,17 +82,17 @@
         loop: true,
         center: true,
         responsive: {
-            0:{
-                items:1
+            0: {
+                items: 1
             },
-            576:{
-                items:1
+            576: {
+                items: 1
             },
-            768:{
-                items:2
+            768: {
+                items: 2
             },
-            992:{
-                items:3
+            992: {
+                items: 3
             }
         }
     });
@@ -109,17 +109,17 @@
         autoplayTimeout: 2000,
         autoplaySpeed: 500,
         responsive: {
-            0:{
-                items:2
+            0: {
+                items: 2
             },
-            576:{
-                items:2
+            576: {
+                items: 2
             },
-            768:{
-                items:4
+            768: {
+                items: 4
             },
-            992:{
-                items:6
+            992: {
+                items: 6
             }
         }
     });
@@ -138,7 +138,7 @@
     function highlightCurrentPage() {
         const path = window.location.pathname;
         const currentPage = path.split("/").pop().replace(".html", "") || 'index';
-        
+
         const links = document.querySelectorAll('.nav-item.nav-link');
         links.forEach(link => {
             const page = link.getAttribute('data-page');
@@ -155,63 +155,119 @@
     ]).then(() => {
         highlightCurrentPage();
     });
-    
+
 
     //Service Gallery 
     document.addEventListener("DOMContentLoaded", function () {
         const modalImage = document.getElementById("modalImage");
-      
+
         document.querySelectorAll('[data-bs-target="#imageModal"]').forEach(img => {
-          img.addEventListener("click", function () {
-            modalImage.src = this.getAttribute("data-bs-image");
-          });
+            img.addEventListener("click", function () {
+                modalImage.src = this.getAttribute("data-bs-image");
+            });
         });
-      });
-      
+    });
+
 })(jQuery);
 
 document.addEventListener('DOMContentLoaded', function () {
-    const carouselElement = document.querySelector('#header-carousel');
-  
-    function animateSlide(slide) {
-      const innerText = slide.querySelector('.inner-text');
-      const buttons = slide.querySelector('.buttons');
-  
-      if (!innerText || !buttons) return;
-  
-      // Reset animations
-      innerText.classList.remove('animate__animated', 'animate__slideInLeft');
-      buttons.classList.remove('animate__animated', 'animate__slideInUp');
-      innerText.classList.add('invisible');
-      buttons.classList.add('invisible');
-  
-      // STEP 1: Animate inner text after 1s
-      setTimeout(() => {
-        innerText.classList.remove('invisible');
-        innerText.classList.add('animate__animated', 'animate__slideInLeft');
-        innerText.style.setProperty('--animate-duration', '1s');
-  
-        // STEP 2: Wait for innerText animation to finish, then animate buttons
-        innerText.addEventListener(
-          'animationend',
-          () => {
-            buttons.classList.remove('invisible');
-            buttons.classList.add('animate__animated', 'animate__slideInUp');
-            buttons.style.setProperty('--animate-duration', '1s');
-          },
-          { once: true }
-        );
-      }, 1000); // 1 second delay after image is visible
-    }
-  
-    // Animate first active slide on load
-    const firstSlide = carouselElement.querySelector('.carousel-item.active');
-    if (firstSlide) animateSlide(firstSlide);
-  
-    // Animate every time the carousel changes slide
-    carouselElement.addEventListener('slid.bs.carousel', function () {
-      const activeSlide = carouselElement.querySelector('.carousel-item.active');
-      if (activeSlide) animateSlide(activeSlide);
+    const carousel = document.getElementById('header-carousel');
+    if (!carousel) return;
+
+    // 1. Initialize carousel with optimized configuration
+    const carouselInstance = new bootstrap.Carousel(carousel, {
+        interval: 5000,
+        wrap: true,
+        pause: 'hover',
+        keyboard: false,
+        touch: true
     });
-  });
-  
+
+    // 2. Enhanced Animation Manager with position tracking
+    const animationManager = {
+        currentSlide: null,
+        animateSlide: function (slide) {
+            // Skip if this is already the active slide
+            if (slide === this.currentSlide) return;
+            this.currentSlide = slide;
+
+            const innerText = slide.querySelector('.inner-text');
+            const buttons = slide.querySelector('.buttons');
+
+            if (!innerText || !buttons) return;
+
+            // Reset state with transform to ensure consistent starting position
+            innerText.style.transform = 'translateX(-20px)';
+            buttons.style.transform = 'translateY(30px)';
+
+            innerText.classList.remove('animate__animated', 'animate__slideInLeft');
+            buttons.classList.remove('animate__animated', 'animate__slideInUp');
+            innerText.classList.add('invisible');
+            buttons.classList.add('invisible');
+
+            // Animation sequence with forced reflow
+            void innerText.offsetHeight; // Trigger reflow
+
+            setTimeout(() => {
+                innerText.classList.remove('invisible');
+                innerText.classList.add('animate__animated', 'animate__slideInLeft');
+
+                innerText.addEventListener('animationend', () => {
+                    buttons.classList.remove('invisible');
+                    buttons.classList.add('animate__animated', 'animate__slideInUp');
+                }, { once: true });
+            }, 50);
+        },
+        resetSlide: function (slide) {
+            const innerText = slide?.querySelector('.inner-text');
+            const buttons = slide?.querySelector('.buttons');
+
+            if (innerText) {
+                innerText.style.removeProperty('transform');
+                innerText.classList.remove(
+                    'animate__animated',
+                    'animate__slideInLeft',
+                    'invisible'
+                );
+            }
+            if (buttons) {
+                buttons.style.removeProperty('transform');
+                buttons.classList.remove(
+                    'animate__animated',
+                    'animate__slideInUp',
+                    'invisible'
+                );
+            }
+        }
+    };
+
+    // 3. Optimized Event Handling
+    const handleSlideChange = (event) => {
+        // Reset previous slide
+        animationManager.resetSlide(animationManager.currentSlide);
+
+        // Animate new slide
+        requestAnimationFrame(() => {
+            animationManager.animateSlide(event.relatedTarget);
+        });
+    };
+
+    // 4. Initialize with proper cleanup
+    const initializeCarousel = () => {
+        // Initial slide animation
+        const firstSlide = carousel.querySelector('.carousel-item.active');
+        if (firstSlide) {
+            setTimeout(() => animationManager.animateSlide(firstSlide), 100);
+        }
+
+        // Event listeners
+        carousel.addEventListener('slid.bs.carousel', handleSlideChange);
+    };
+
+    // 5. Initialize when ready
+    if (document.readyState === 'complete') {
+        initializeCarousel();
+    } else {
+        window.addEventListener('load', initializeCarousel);
+    }
+});

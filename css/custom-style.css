@@ -2,12 +2,15 @@
 .btn-primary {
     background-color: var(--primary) !important;
 }
+
 .text-primary {
     color: var(--primary) !important;
 }
+
 .text-secondary {
     color: var(--secondary) !important;
 }
+
 .bg-light {
     background-color: rgba(238, 125, 0, 0.11) !important;
 }
@@ -16,6 +19,7 @@
 .topbar a:hover .text-light {
     color: var(--secondary) !important;
 }
+
 .btn-outline-light:hover {
     color: var(--secondary);
     background-color: transparent;
@@ -26,36 +30,43 @@
 .max-h-700 {
     max-height: 700px;
 }
-.carousel > button {
+
+.carousel>button {
     display: none;
 }
+
 /* Header  */
 .logo img {
     max-width: 200px;
 }
+
 .navbar-dark {
     background-color: #fff;
 }
+
 .topbar .row,
-.navbar-dark .navbar {    
+.navbar-dark .navbar {
     max-width: 1430px;
     width: 100%;
     margin: auto;
 }
+
 header .dropdown-item {
     color: var(--primary);
 }
+
 header .dropdown-item:hover,
 header .nav-link.dropdown-toggle.show:focus,
 .navbar-dark .navbar-nav .nav-link.show {
     color: var(--secondary) !important;
     background-color: transparent;
 }
+
 .carousel-content {
     max-width: 1360px;
     margin: auto;
     width: 100%;
-    padding: 0 10px ;
+    padding: 0 10px;
 
 }
 
@@ -63,6 +74,7 @@ header .nav-link.dropdown-toggle.show:focus,
 footer .footer-info div a {
     color: #fff !important;
 }
+
 /* Home */
 /*Our Labs*/
 .our-labs .owl-carousel .item img {
@@ -70,6 +82,7 @@ footer .footer-info div a {
     width: auto;
     margin: auto;
 }
+
 .our-labs .owl-carousel .item span {
     display: block;
     margin: 15px 0;
@@ -85,9 +98,11 @@ footer .footer-info div a {
     border: 2px solid rgb(0 0 0 / 6%);
     border-radius: 10px !important;
 }
+
 .brands .zoomIn img {
     transition: .5s;
 }
+
 .brands .zoomIn:hover img {
     transform: scale(1.15);
 }
@@ -96,10 +111,12 @@ footer .footer-info div a {
 .contact-us-info a:hover {
     color: var(--secondary) !important;
 }
+
 form.contact-us .form-control:focus {
     box-shadow: 0 0 0 .25rem rgba(238, 125, 0, 0.11) !important;
     border-color: rgba(238, 125, 0, 0.11) !important;
 }
+
 form.contact-us .btn:hover {
     background-color: var(--secondary) !important;
     color: #fff;
@@ -109,13 +126,16 @@ form.contact-us .btn:hover {
 .lab-type .p-4 a {
     transition: .5s;
 }
+
 .lab-type .p-4 a:hover {
     color: var(--secondary) !important;
 }
+
 .lab-type-list h5 {
     width: calc(100% / 3);
     padding-left: 35px;
 }
+
 .lab-type-list h5 i {
     left: 0;
 }
@@ -126,4 +146,106 @@ form.contact-us .btn:hover {
     border-radius: 10px;
     height: 300px;
     object-fit: cover;
-  }
+}
+
+
+/* Add to your stylesheet */
+.carousel-item {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+}
+
+.carousel-inner {
+    overflow: visible;
+    /* Prevents clipping during animations */
+}
+
+.carousel-fade .carousel-item {
+    transition: opacity 0.5s ease !important;
+    opacity: 0;
+}
+
+.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+
+/* Animation timing adjustments */
+.animate__slideInLeft {
+    --animate-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate__slideInUp {
+    --animate-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Add to your stylesheet */
+.carousel-content {
+    position: relative;
+    overflow: hidden;
+}
+
+.buttons {
+    position: relative;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: none !important;
+    will-change: transform, opacity;
+}
+
+.inner-text {
+    transform: translateX(-20px);
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.invisible {
+    visibility: hidden !important;
+}
+
+/* Custom animations to override animate.css */
+@keyframes customSlideInLeft {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes customSlideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate__slideInLeft {
+    animation: customSlideInLeft 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+}
+
+.animate__slideInUp {
+    animation: customSlideInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+}
+
+/* Carousel item fixes */
+.carousel-item {
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.carousel-fade .carousel-item {
+    transition: opacity 0.6s ease !important;
+}
